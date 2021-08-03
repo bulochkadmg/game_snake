@@ -50,3 +50,27 @@ let gameOver = function() {
     ctx.textBaseline = 'middle';
     ctx.fillText('Game Over', width / 2, height / 2);
 };
+
+// block builder
+let Block = function(col, row) {
+    this.col = col;
+    this.row = row;
+};
+
+Block.prototype.drawSquare = function(color) {
+    let x = this.col * blockSize,
+        y = this.row * blockSize;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, blockSize, blockSize);
+};
+
+Block.prototype.drawCircle = function(color) {
+    let centerX = this.col * blockSize + blockSize / 2,
+        centerY = this.row * blockSize + blockSize / 2;
+    ctx.fillStyle = color;
+    circle(centerX, centerY, blockSize / 2, true);
+};
+
+Block.prototype.equal = function(otherBlocks) {
+    return this.col === otherBlocks.col && this.row === otherBlocks.row;
+};

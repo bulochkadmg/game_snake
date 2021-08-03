@@ -181,10 +181,17 @@ Apple.prototype.draw = function() {
 };
 
 // move apple
-Apple.prototype.move = function() {
+Apple.prototype.move = function(occupiedBlocks) {
     let randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1,
         randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) +1;
     this.position = new Block(randomCol, randomRow);
+
+    for (var m = 0; m < occupiedBlocks.length; m++) {
+        if (this.position.equal(occupiedBlocks[m])) {
+          this.move(occupiedBlocks);
+          return;
+        }
+      }
 };
 
 // setInterval for animation game and create snake, apple

@@ -31,16 +31,6 @@ let drawScore = function() {
     ctx.fillText('Score: ' + score, blockSize, blockSize);
 };
 
-// setInterval for animation game
-let intervalId = setInterval(function() {
-    ctx.clearRect(0, 0, width, height);
-    drawScore();
-    snake.move();
-    snake.draw();
-    apple.draw();
-    drawBorder();
-}, 100);
-
 // game over
 let gameOver = function() {
     clearInterval(intervalId);
@@ -196,3 +186,16 @@ Apple.prototype.move = function() {
         randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) +1;
     this.position = new Block(randomCol, randomRow);
 };
+
+// setInterval for animation game and create snake, apple
+let snake = new Snake(),
+    apple = new Apple();
+
+let intervalId = setInterval(function() {
+    ctx.clearRect(0, 0, width, height);
+    drawScore();
+    snake.move();
+    snake.draw();
+    apple.draw();
+    drawBorder();
+}, 100);

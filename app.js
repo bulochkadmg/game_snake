@@ -51,6 +51,17 @@ let gameOver = function() {
     ctx.fillText('Game Over', width / 2, height / 2);
 };
 
+// draw circle
+let circle = function(x, y, radius, fillCircle) {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+    if(fillCircle) {
+        ctx.fill();
+    } else {
+        ctx.stroke();
+    }
+};
+
 // block builder
 let Block = function(col, row) {
     this.col = col;

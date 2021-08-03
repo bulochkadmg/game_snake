@@ -169,3 +169,12 @@ Snake.prototype.setDirection = function(newDirection) {
 
     this.nextDirection = newDirection;
 };
+
+// create apple
+let Apple = function() {
+    this.position = new Block(10, 10);
+};
+
+Apple.prototype.draw = function() {
+    this.position.drawCircle('LimeGreen');
+};

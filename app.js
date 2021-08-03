@@ -178,3 +178,10 @@ let Apple = function() {
 Apple.prototype.draw = function() {
     this.position.drawCircle('LimeGreen');
 };
+
+// move apple
+Apple.prototype.move = function() {
+    let randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1,
+        randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) +1;
+    this.position = new Block(randomCol, randomRow);
+};

@@ -92,3 +92,80 @@ Snake.prototype.draw = function() {
         this.segments[j].drawSquare('Blue');
     }
 };
+
+// Snake move
+Snake.prototype.move = function() {
+    let head = this.segments[0],
+        newHead;
+    
+    this.direction = this.nextDirection;
+
+    if(this.direction === 'right') {
+        newHead = new Block(head.col + 1, head.row);
+    } else if(this.direction === 'down') {
+        newHead = new Block(head.col, head.row + 1);
+    } else if(this.direction === 'left') {
+        newHead = new Block(head.col - 1, head.row);
+    } else if(this.direction === 'up') {
+        newHead = new Block(head.col, head.row - 1);
+    }
+
+    if(this.checkCollision(newHead)) {
+        gameOver();
+        return;
+    }
+
+    this.segments.unshift(newHead);
+
+    if(newHead.equal(apple.position)) {
+        score++;
+        apple.move();
+    } else {
+        this.segments.pop();
+    }
+};
+
+Snake.prototype.checkCollision = function(head) {
+    let leftCollision = (head.col === 0),
+        topCollision = (head.row === 0),
+        rightCollision = (head.col === widthInBlocks - 1),
+        bottomCollision = (head.row === heightInBlocks - 1),
+        wallCollision = leftCollision || topCollision || rightCollision || bottomCollision,
+        selfCollision = false;
+
+    for(let i = 0; i < this.segments.length; i++) {
+        if(head.equal(this.segments[i])) {
+            selfCollision = true;
+        }
+    }
+
+    return wallCollision || selfCollision;
+};
+
+let directions = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+};
+
+$('body').keydown(function(event) {
+    let newDirection = directions[event.keyCode];
+    if(newDirection !== undefined) {
+        snake.setDirection(newDirection);
+    }
+});
+
+Snake.prototype.setDirection = function(newDirection) {
+    if(this.direction === 'up' && newDirection === 'down') {
+        return;
+    } else if(this.direction === 'right' && newDirection === 'left') {
+        return;
+    } else if(this.direction === 'down' && newDirection === 'up') {
+        return;
+    } else if(this.direction === 'left' && newDirection === 'right') {
+        return;
+    }
+
+    this.nextDirection = newDirection;
+};

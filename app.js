@@ -6,3 +6,6 @@ let canvas = document.getElementById('canvas'),
 
 
 // divide the canvas into blocks
+let blockSize = 10,
+    widthInBlocks = width / blockSize,
+    heightInBlocks = height / blockSize;

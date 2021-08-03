@@ -30,3 +30,23 @@ let drawScore = function() {
     ctx.textBaseline = 'top';
     ctx.fillText('Score: ' + score, blockSize, blockSize);
 };
+
+// setInterval for animation game
+let intervalId = setInterval(function() {
+    ctx.clearRect(0, 0, width, height);
+    drawScore();
+    snake.move();
+    snake.draw();
+    apple.draw();
+    drawBorder();
+}, 100);
+
+// game over
+let gameOver = function() {
+    clearInterval(intervalId);
+    ctx.font = '60px Courier';
+    ctx.fillStyle = 'Black';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Game Over', width / 2, height / 2);
+};

@@ -74,3 +74,21 @@ Block.prototype.drawCircle = function(color) {
 Block.prototype.equal = function(otherBlocks) {
     return this.col === otherBlocks.col && this.row === otherBlocks.row;
 };
+
+// create and draw snake
+let Snake = function() {
+    this.segments = [
+        new Block(7, 5),
+        new Block(6,5),
+        new Block(5, 5)
+    ];
+
+    this.direction = 'right';
+    this.nextDirection = 'right';
+};
+
+Snake.prototype.draw = function() {
+    for(let j = 0; j < this.segments.length; j++) {
+        this.segments[j].drawSquare('Blue');
+    }
+};
